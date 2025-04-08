@@ -4,7 +4,6 @@ import { LucidePlane, Paperclip, Image } from 'lucide-react';
 
 function App() {
   const [prompt, setPrompt] = useState('');
-  const [plan, setPlan] = useState('');
   const [messages, setMessages] = useState([
     { fromUser: false, text: "👋 Hi, I'm your travel companion! Ask me anything about your next trip." }
   ]);
@@ -16,7 +15,6 @@ function App() {
     try {
       const result = await askTravelAI(prompt);
       setMessages((prev) => [...prev, { fromUser: false, text: result }]);
-      setPlan(result);
     } catch (err) {
       setMessages((prev) => [
         ...prev,
@@ -26,23 +24,24 @@ function App() {
   };
 
   return (
-    <div className="w-full h-screen bg-gradient-to-t from-blue-300 via-white to-blue-50 flex justify-center items-center">
-      <div className="w-[80%] h-[80%] max-w-[600px] max-h-[600px] rounded-xl shadow-lg border border-gray-200 bg-white overflow-hidden flex flex-col">
-        <div className="bg-blue-600 rounded-t-xl p-4 flex items-center text-white justify-between shadow-md">
+    <div className="w-full h-screen bg-gradient-to-t from-blue-200 via-white to-blue-50 flex justify-center items-center">
+      <div className="w-[80%] h-[80%] max-w-[600px] max-h-[600px] rounded-xl shadow-lg border border-gray-200 bg-white">
+
+        <div className="bg-blue-600 rounded-t-xl p-3 flex items-center text-white justify-between">
           <div className="flex items-center space-x-2">
-            <div className="bg-white rounded-full w-8 h-8 flex justify-center items-center">
-              <span className="text-blue-600 font-bold text-xl">🧳</span>
+            <div className="bg-white rounded-full w-6 h-6 flex justify-center items-center">
+              <span className="text-blue-600 font-bold">🧳</span>
             </div>
-            <span className="font-semibold text-lg">AI Travel Companion</span>
+            <span className="font-semibold">AI Travel Companion</span>
           </div>
-          <button className="text-white hover:text-gray-300 focus:outline-none">✖</button>
+          <button className="text-white hover:text-gray-300">✖</button>
         </div>
 
-        <div className="p-4 space-y-4 text-sm flex-1 overflow-y-auto">
+        <div className="p-3 space-y-3 text-sm h-[80%] overflow-y-auto">
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={`p-3 rounded-lg max-w-[80%] transition-all transform ${
+              className={`p-2 rounded-lg max-w-[80%] ${
                 msg.fromUser ? 'bg-blue-100 ml-auto' : 'bg-gray-100'
               }`}
             >
@@ -51,15 +50,15 @@ function App() {
           ))}
         </div>
 
-        <div className="flex items-center border-t p-3 bg-white">
+        <div className="flex items-center border-t p-2 bg-white">
           <button className="p-2 text-gray-400 hover:text-gray-600">
-            <Paperclip size={18} />
+            <Paperclip size={16} />
           </button>
           <button className="p-2 text-gray-400 hover:text-gray-600">
-            <Image size={18} />
+            <Image size={16} />
           </button>
           <input
-            className="flex-1 mx-2 p-3 rounded-lg border text-sm outline-none focus:ring-2 focus:ring-blue-400 transition-all"
+            className="flex-1 mx-2 p-2 rounded-lg border text-sm outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Type your message..."
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
@@ -67,9 +66,9 @@ function App() {
           />
           <button
             onClick={handleSubmit}
-            className="p-2 text-blue-600 hover:text-blue-700 focus:outline-none transform hover:scale-110 transition-all"
+            className="p-2 text-blue-600 hover:text-blue-700 focus:outline-none"
           >
-            <LucidePlane size={18} />
+            <LucidePlane size={16} />
           </button>
         </div>
       </div>
